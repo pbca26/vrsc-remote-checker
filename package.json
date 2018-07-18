@@ -1,0 +1,24 @@
+{
+  "name": "vrsc-remote-node-checker",
+  "productName": "VRSC remote node checker",
+  "version": "0.0.1",
+  "description": "VRSC remote node checker",
+  "main": "main.js",
+  "scripts": {
+    "start": "node main.js",
+    "power": "node power.js"
+  },
+  "repository": "https://github.com/pbca26/ssh/",
+  "homepage": "https://github.com/pbca26",
+  "keywords": [
+    "VRSC",
+    "komodo",
+    "VerusCoin"
+  ],
+  "author": "pbca26",
+  "license": "MIT",
+  "dependencies": {
+    "bluebird": "^3.4.7",
+    "ssh2": "^0.6.1"
+  }
+}
