@@ -17,7 +17,7 @@ Promise.all(config.map((item, index) => {
 				})
 				.on('data', (data) => {
 					fs.writeFileSync(`miner-${index + 1}.txt`, data + '\n', { encoding: 'utf-8', flag: 'a' });
-
+					
 					// console.log('STDOUT: ' + data);
 				})
 				.stderr.on('data', (data) => {
@@ -36,18 +36,22 @@ Promise.all(config.map((item, index) => {
 }))
 .then(promiseResult => {
 	let totalBalance = 0;
-
+	let totalImmatureBalance = 0;
+	
 	for (let i = 0; i < config.length; i++) {
 		const rawData = fs.readFileSync(`miner-${i + 1}.txt`, { encoding: 'utf-8' });
-		const split1 = rawData.split('{');
+		const split1 = rawData.split(config[i].parse);
 		const split2 = split1[1].split('logout');
 		split2[0] = '{' + split2[0];
-		const balance = JSON.parse(split2[0].trim())['immature_balance'];
-
+		const immatureBalance = JSON.parse(split2[0].trim())['immature_balance'];
+		const balance = JSON.parse(split2[0].trim())['balance'];
+		
 		totalBalance += Number(balance);
+		totalImmatureBalance += Number(immatureBalance);		
 		// console.log(`miner-${i + 1} ${config[i].host} balance: ${balance}`);
-		console.log(`miner-${i + 1} balance: ${balance}`);
+		console.log(`miner-${i + 1} balance: ${immatureBalance} | ${balance}`);		
 	}
 
-	console.log('----------------\nTotal: ' + totalBalance);
+	console.log('----------------\nTotal immature: ' + totalImmatureBalance);
+	console.log('Total: ' + totalBalance);
 });
