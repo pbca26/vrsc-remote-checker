@@ -6,7 +6,8 @@
   "main": "main.js",
   "scripts": {
     "start": "node main.js",
-    "power": "node power.js"
+    "power": "node power.js",
+    "info": "node info.js"
   },
   "repository": "https://github.com/pbca26/ssh/",
   "homepage": "https://github.com/pbca26",
