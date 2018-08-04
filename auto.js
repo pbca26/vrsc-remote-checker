@@ -5,6 +5,7 @@ const request = require('request');
 
 const CHECK_TIMEOUT = 240 * 1000;
 
+const verusd = fs.readFileSync('./verus-cli/start.sh', 'utf8').replace('./', './verus-cli/');
 fs.writeFileSync('auto-log.txt', '', { encoding: 'utf-8', flag: 'w' });
 
 const getConf = (chain) => {
@@ -99,6 +100,7 @@ const writeLog = (data) => {
                   writeLog('needs restart');
 
                   exec('./verus-cli/komodo-cli -ac_name=VRSC stop');
+                  writeLog('needs restart, stop attempt 1');
 
                   setTimeout(() => {
                     exec('./verus-cli/komodo-cli -ac_name=VRSC stop');
@@ -114,22 +116,22 @@ const writeLog = (data) => {
                   }, 15000);
 
                   setTimeout(() => {
-                    exec('nohup ./verus-cli/start.sh &');
+                    exec(verusd);
                     writeLog('needs restart, restart attempt 1');
 
                     setTimeout(() => {
-                      exec('nohup ./verus-cli/start.sh &');
+                      exec(verusd);
                       writeLog('needs restart, restart attempt 2');
                     }, 5000);
                     setTimeout(() => {
-                      exec('nohup ./verus-cli/start.sh &');
+                      exec(verusd);
                       writeLog('needs restart, restart attempt 3');
                     }, 10000);
                     setTimeout(() => {
-                      exec('nohup ./verus-cli/start.sh &');
+                      exec(verusd);
                       writeLog('needs restart, restart attempt 4');
                     }, 15000);
-                  }, 20000);
+                  }, 30000);
       				  } else {
                   writeLog('block deviation is normal');
       				  }
