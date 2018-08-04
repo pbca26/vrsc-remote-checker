@@ -7,7 +7,10 @@
   "scripts": {
     "start": "node main.js",
     "power": "node power.js",
-    "info": "node info.js"
+    "info": "node info.js",
+    "stop": "node stop.js",
+    "restart": "node restart.js",
+    "auto": "node auto.js"
   },
   "repository": "https://github.com/pbca26/ssh/",
   "homepage": "https://github.com/pbca26",
@@ -20,6 +23,7 @@
   "license": "MIT",
   "dependencies": {
     "bluebird": "^3.4.7",
-    "ssh2": "^0.6.1"
+    "ssh2": "^0.6.1",
+    "request": "^2.80.0"
   }
 }
